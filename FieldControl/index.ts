@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { FieldControlApp, IFieldControlProps, ITextInputState} from "./FieldControl";
+import FieldControlApp, { IFieldControlProps } from "./FieldControl";
 import * as React from "react";
 
 export class FieldControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
@@ -47,12 +47,12 @@ export class FieldControl implements ComponentFramework.ReactControl<IInputs, IO
         console.log("update view");
         this._props.Text = context.parameters.Text.raw || ""
         this._props.Type = context.parameters.Type.raw
+        
         return React.createElement(
             FieldControlApp, this._props
         );
     }
-        
-
+       
     /**
      * It is called by the framework prior to a control receiving new data.
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”

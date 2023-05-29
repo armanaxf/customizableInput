@@ -8,39 +8,23 @@ export interface IFieldControlProps {
   onValueChange: (newValue: string) => void
 }
 
-export interface ITextInputState {
-  value: string;
-}
-
-export class FieldControlApp extends React.Component<IFieldControlProps, ITextInputState> {
-  constructor(props: IFieldControlProps) {
-    super(props);
-    this.state = {
-      value: props.Text || "" 
-    }
+const FieldControlApp = (props: IFieldControlProps): React.JSX.Element => {
+  const [value, newValue] = useState(props.Text);
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>  {
+    const newValue = event.target.value
+    props.onValueChange(newValue)
   }
-  public render(): React.ReactNode {
-    return (
-      <FluentProvider theme={teamsLightTheme} >
-      <Field
-        label={this.props.Text}
-      >
-        <Input value={this.state.value.trim() !== "" ? this.state.value : ""} 
-        onChange={this.handleInputChange}
-        type={this.props.Type === "text" ? "text" : "number"}/>
-      </Field>
-    </FluentProvider>
-    )
-  }
+  return (
+    <FluentProvider theme={teamsLightTheme} >
+    <Field
+      label={props.Text}
+    >
+      <Input 
+      onChange={handleInputChange}
+      type={props.Type}/>
+    </Field>
+  </FluentProvider>
+  )
+} 
 
-  handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value;
-    console.log("handleInputChange: newValue: " + JSON.stringify(newValue));
-
-    this.setState({
-      value: newValue
-    });
-
-    this.props.onValueChange(newValue);
-  }
-}
+export default FieldControlApp
