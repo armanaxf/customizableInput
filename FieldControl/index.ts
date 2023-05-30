@@ -33,6 +33,7 @@ export class FieldControl implements ComponentFramework.ReactControl<IInputs, IO
             Text: context.parameters.Text.raw!,
             Type: context.parameters.Type.raw,
             onValueChange: this.onValueChange,
+
         }
         console.log("init calls this.onTextChange: " + JSON.stringify(this._props.Text))
         this.onValueChange(this._props.Text);
@@ -47,7 +48,6 @@ export class FieldControl implements ComponentFramework.ReactControl<IInputs, IO
         console.log("update view");
         this._props.Text = context.parameters.Text.raw || ""
         this._props.Type = context.parameters.Type.raw
-        
         return React.createElement(
             FieldControlApp, this._props
         );
