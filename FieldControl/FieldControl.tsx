@@ -6,9 +6,11 @@ import { wrap } from 'module';
 export interface IFieldControlProps {
   Text?: string;
   Type: "text" | "number" | "password";
-  onValueChange: (newValue: string) => void
-  Height?: string | undefined
-  Width?: string | undefined
+  Orientation: "horizontal" | "vertical";
+  Placeholder?: string;
+  onValueChange: (newValue: string) => void;
+  Height?: string | undefined;
+  Width?: string | undefined;
 }
 
 const useStyles = makeStyles({
@@ -30,10 +32,10 @@ const FieldControlApp = (props: IFieldControlProps): React.JSX.Element => {
     <FluentProvider theme={webLightTheme} >
     <Field
       label={props.Text}
-      orientation="vertical"
-      as="div"
+      orientation={props.Orientation}
     >
       <Input
+      placeholder={props.Placeholder}
       onChange={handleInputChange}
       type={props.Type}/>
     </Field>
